@@ -1,0 +1,4 @@
+# For a trial on one machine, without a domain or a certificate: plain
+# HTTP on port 3340. Never on a machine reachable from the internet.
+enable_relay = true
+http_bind_addr = "[::]:3340"

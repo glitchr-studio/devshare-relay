@@ -1,0 +1,25 @@
+# The relay of your DevShare sessions. Change the two lines marked below,
+# then: docker compose up -d. In DevShare, Settings, General, Relay, enter
+# https://<your domain>, and press Test under This computer.
+
+enable_relay = true
+enable_quic_addr_discovery = true
+http_bind_addr = "[::]:80"
+
+[tls]
+https_bind_addr = "[::]:443"
+quic_bind_addr = "[::]:7842"
+cert_mode = "LetsEncrypt"
+cert_dir = "/var/lib/iroh-relay"
+hostname = "relay.example.com"   # <- your domain name, pointing to this machine
+contact = "you@example.com"      # <- your email, for Let's Encrypt
+
+# A relay carries traffic for anyone who reaches it: each client is held to
+# a steady 2 MiB/s, bursts of 8 MiB, and new connections to 20 a second.
+[limits]
+accept_conn_limit = 20.0
+accept_conn_burst = 100
+
+[limits.client.rx]
+bytes_per_second = 2097152
+max_burst_bytes = 8388608

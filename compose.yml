@@ -1,0 +1,15 @@
+# One relay, with its own Let's Encrypt certificate. Edit relay.toml (its
+# domain name and your email), then: docker compose up -d
+services:
+  relay:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "80:80"          # Let's Encrypt and the relay's own checks
+      - "443:443"        # the relay itself, over HTTPS
+      - "7842:7842/udp"  # address discovery: helps two devices find a direct route
+    volumes:
+      - ./relay.toml:/etc/iroh-relay/relay.toml:ro
+      - certificates:/var/lib/iroh-relay
+volumes:
+  certificates:
