@@ -1,7 +1,7 @@
 # iroh-relay, built from its published source: the relay DevShare's
 # sessions use when a direct connection cannot be made.
 FROM rust:1-bookworm AS build
-RUN cargo install --locked iroh-relay@1.3.0 --features server --root /out
+RUN cargo install --locked iroh-relay@1.5.0 --features server --root /out
 
 FROM debian:bookworm-slim
 RUN apt-get update \
